@@ -1,3 +1,6 @@
 go 1.22.2
 
-use ./concurrency/lock
+use (
+	./concurrency/lock
+	./mongo
+)
