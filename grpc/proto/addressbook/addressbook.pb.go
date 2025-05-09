@@ -194,6 +194,42 @@ func (x *AddressBook) GetPeople() []*Person {
 	return nil
 }
 
+type GetAllParams struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllParams) Reset() {
+	*x = GetAllParams{}
+	mi := &file_grpc_addressbook_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllParams) ProtoMessage() {}
+
+func (x *GetAllParams) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_addressbook_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllParams.ProtoReflect.Descriptor instead.
+func (*GetAllParams) Descriptor() ([]byte, []int) {
+	return file_grpc_addressbook_proto_rawDescGZIP(), []int{2}
+}
+
 type Person_PhoneNumber struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Number        string                 `protobuf:"bytes,1,opt,name=number,proto3" json:"number,omitempty"`
@@ -204,7 +240,7 @@ type Person_PhoneNumber struct {
 
 func (x *Person_PhoneNumber) Reset() {
 	*x = Person_PhoneNumber{}
-	mi := &file_grpc_addressbook_proto_msgTypes[2]
+	mi := &file_grpc_addressbook_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -216,7 +252,7 @@ func (x *Person_PhoneNumber) String() string {
 func (*Person_PhoneNumber) ProtoMessage() {}
 
 func (x *Person_PhoneNumber) ProtoReflect() protoreflect.Message {
-	mi := &file_grpc_addressbook_proto_msgTypes[2]
+	mi := &file_grpc_addressbook_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,12 +297,15 @@ const file_grpc_addressbook_proto_rawDesc = "" +
 	"\x06number\x18\x01 \x01(\tR\x06number\x12*\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x16.addressbook.PhoneTypeR\x04type\":\n" +
 	"\vAddressBook\x12+\n" +
-	"\x06people\x18\x01 \x03(\v2\x13.addressbook.PersonR\x06people*h\n" +
+	"\x06people\x18\x01 \x03(\v2\x13.addressbook.PersonR\x06people\"\x0e\n" +
+	"\fGetAllParams*h\n" +
 	"\tPhoneType\x12\x1a\n" +
 	"\x16PHONE_TYPE_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11PHONE_TYPE_MOBILE\x10\x01\x12\x13\n" +
 	"\x0fPHONE_TYPE_HOME\x10\x02\x12\x13\n" +
-	"\x0fPHONE_TYPE_WORK\x10\x03B\x13Z\x11proto/addressbookb\x06proto3"
+	"\x0fPHONE_TYPE_WORK\x10\x032S\n" +
+	"\x12AddressBookService\x12=\n" +
+	"\x06GetAll\x12\x19.addressbook.GetAllParams\x1a\x18.addressbook.AddressBookB\x13Z\x11proto/addressbookb\x06proto3"
 
 var (
 	file_grpc_addressbook_proto_rawDescOnce sync.Once
@@ -281,21 +320,24 @@ func file_grpc_addressbook_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_addressbook_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_grpc_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_grpc_addressbook_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_grpc_addressbook_proto_goTypes = []any{
 	(PhoneType)(0),                // 0: addressbook.PhoneType
 	(*Person)(nil),                // 1: addressbook.Person
 	(*AddressBook)(nil),           // 2: addressbook.AddressBook
-	(*Person_PhoneNumber)(nil),    // 3: addressbook.Person.PhoneNumber
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*GetAllParams)(nil),          // 3: addressbook.GetAllParams
+	(*Person_PhoneNumber)(nil),    // 4: addressbook.Person.PhoneNumber
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_grpc_addressbook_proto_depIdxs = []int32{
-	3, // 0: addressbook.Person.phones:type_name -> addressbook.Person.PhoneNumber
-	4, // 1: addressbook.Person.last_updated:type_name -> google.protobuf.Timestamp
+	4, // 0: addressbook.Person.phones:type_name -> addressbook.Person.PhoneNumber
+	5, // 1: addressbook.Person.last_updated:type_name -> google.protobuf.Timestamp
 	1, // 2: addressbook.AddressBook.people:type_name -> addressbook.Person
 	0, // 3: addressbook.Person.PhoneNumber.type:type_name -> addressbook.PhoneType
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
+	3, // 4: addressbook.AddressBookService.GetAll:input_type -> addressbook.GetAllParams
+	2, // 5: addressbook.AddressBookService.GetAll:output_type -> addressbook.AddressBook
+	5, // [5:6] is the sub-list for method output_type
+	4, // [4:5] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -312,9 +354,9 @@ func file_grpc_addressbook_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_grpc_addressbook_proto_rawDesc), len(file_grpc_addressbook_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_grpc_addressbook_proto_goTypes,
 		DependencyIndexes: file_grpc_addressbook_proto_depIdxs,

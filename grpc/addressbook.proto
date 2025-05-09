@@ -31,3 +31,9 @@ enum PhoneType {
 message AddressBook {
     repeated Person people = 1;
 }
+
+message GetAllParams {}
+
+service AddressBookService {
+    rpc GetAll(GetAllParams) returns (AddressBook);
+}
