@@ -6,18 +6,18 @@ import (
 )
 
 type Message struct {
-	ID string // uuid
-	Topic string
-	Points int
-	UserID string
+	ID     string `json:"-"` // uuid
+	Topic  string `json:"-"`
+	Points int    `json:"points"`
+	UserID string `json:"-"`
 }
 
 type InMemoryMessageBroker struct {
 	subscribers map[string][]chan Message
-	lock sync.RWMutex
+	lock        sync.RWMutex
 }
 
-func NewInMemoryMessageBroker() *InMemoryMessageBroker{
+func NewInMemoryMessageBroker() *InMemoryMessageBroker {
 	return &InMemoryMessageBroker{
 		subscribers: make(map[string][]chan Message),
 	}
